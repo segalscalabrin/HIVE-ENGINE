@@ -3,12 +3,12 @@ project "Hive"
    language "C++"
    
    files { 
-      "%{prj.name}/Source/**.h", 
-      "%{prj.name}/Source/**.cpp" 
+      "Source/**.h", 
+      "Source/**.cpp" 
    }
 
    includedirs {
-      "%{wks.name}/Hive/Vendor/spdlog/include"
+      "Vendor/spdlog/include"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
@@ -18,7 +18,7 @@ project "Hive"
       cppdialect "C++17"
       staticruntime "Off"
       defines { "__linux__" }
-      buildoptions { "-fPIC" }  -- Position Independent Code
+      buildoptions { "-fPIC" } 
 
    filter "configurations:Debug"
       defines "HIVE_DEBUG" 

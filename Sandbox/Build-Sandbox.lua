@@ -3,14 +3,14 @@ project "Sandbox"
    language "C++"
 
    files { 
-      "%{prj.name}/Source/**.h", 
-      "%{prj.name}/Source/**.cpp" 
+      "Source/**.h", 
+      "Source/**.cpp" 
    }
 
    includedirs {
-      "%{prj.name}/Source",
-      "%{wks.name}/Hive/Source",
-      "%{wks.name}/Hive/Vendor/spdlog/include"
+      "Source",
+      "../Hive/Source",
+      "../Hive/Vendor/spdlog/include"
    }
 
    links {
@@ -24,6 +24,7 @@ project "Sandbox"
       cppdialect "C++17"
       staticruntime "Off"
       defines { "__linux__" }
+      buildoptions { "-fPIC" } 
 
    filter "configurations:Debug"
       defines "HIVE_DEBUG" 
