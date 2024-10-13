@@ -1,9 +1,7 @@
 #pragma once
 
+#include "Hivepch.h"
 #include "Hive/Core.h"
-
-#include <string>
-#include <functional>
 
 namespace Hive {
 

@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Hive {
 
 	class HIVE_API MouseMovedEvent : public Event

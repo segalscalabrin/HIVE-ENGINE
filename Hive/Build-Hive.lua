@@ -1,6 +1,9 @@
 project "Hive"
    kind "SharedLib"
    language "C++"
+
+   pchheader "Hivepch.h"
+   pchsource "Hive/Source/Hivepch.cpp"
    
    files { 
       "Source/**.h", 
