@@ -2,39 +2,38 @@ project "Hive"
    kind "StaticLib"
    language "C++"
    cppdialect "C++20"
-   targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
-
+   
    files { 
-    "Source/**.h", 
-    "Source/**.cpp" 
+      "Source/**.h", 
+      "Source/**.cpp" 
    }
 
-   includedirs
-   {
-      "Source"
+   includedirs {
+      "Source",
+      --"../Vendor/GLEW/include",
+      --"../Vendor/GLFW/include",
+      --"../Vendor/OpenGL/include"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
-   filter "system:windows"
-       systemversion "latest"
-       defines { }
+   filter "system:linux"
+      defines { "HIVE_PLATFORM_LINUX" }
+      buildoptions { "-fPIC" }  -- Position Independent Code
 
    filter "configurations:Debug"
-       defines { "DEBUG" }
-       runtime "Debug"
-       symbols "On"
+      defines { "DEBUG" }
+      runtime "Debug"
+      symbols "On"
 
    filter "configurations:Release"
-       defines { "RELEASE" }
-       runtime "Release"
-       optimize "On"
-       symbols "On"
+      defines { "RELEASE" }
+      runtime "Release"
+      optimize "On"
 
    filter "configurations:Dist"
-       defines { "DIST" }
-       runtime "Release"
-       optimize "On"
-       symbols "Off"
+      defines { "DIST" }
+      runtime "Release"
+      optimize "On"

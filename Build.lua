@@ -4,9 +4,10 @@ workspace "Hive engine project"
    configurations { "Debug", "Release", "Dist" }
    startproject "Sandbox"
 
-   -- Workspace-wide build options for MSVC
-   filter "system:windows"
-      buildoptions { "/EHsc", "/Zc:preprocessor", "/Zc:__cplusplus" }
+   -- Options de compilation spécifiques à Linux
+   filter "system:linux"
+   buildoptions { "-Wall", "-std=c++20" }  -- Active tous les avertissements et utilise C++17
+   --links { "GL", "GLEW", "glfw" }  -- Lien avec les bibliothèques externes comme OpenGL
 
 OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 
