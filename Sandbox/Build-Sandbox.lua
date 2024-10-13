@@ -1,44 +1,41 @@
 project "Sandbox"
    kind "ConsoleApp"
    language "C++"
-   cppdialect "C++20"
-   staticruntime "off"
 
-   files { "Source/**.h", "Source/**.cpp" }
+   files { 
+      "%{prj.name}/Source/**.h", 
+      "%{prj.name}/Source/**.cpp" 
+   }
 
    includedirs {
-      "Source",
-      "../Hive/Source",
-      --"../Vendor/GLEW/include",
-      --"../Vendor/GLFW/include",
-      --"../Vendor/OpenGL/include"
+      "%{prj.name}/Source",
+      "%{wks.name}/Hive/Source",
+      "%{wks.name}/Hive/Vendor/spdlog/include"
    }
 
    links {
-      "Hive",  -- Liens avec le projet Hive
-      --"../Vendor/GLEW/lib/glew32s",  -- Bibliothèques locales
-      --"../Vendor/GLFW/lib/glfw3",
-      --"GL"  -- OpenGL est généralement lié depuis le système
+      "Hive"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
    filter "system:linux"
-      defines { "HIVE_PLATFORM_LINUX" }
-      links { "pthread", "dl" }
+      cppdialect "C++17"
+      staticruntime "Off"
+      defines { "__linux__" }
 
    filter "configurations:Debug"
-      defines { "DEBUG" }
+      defines "HIVE_DEBUG" 
       runtime "Debug"
       symbols "On"
 
    filter "configurations:Release"
-      defines { "RELEASE" }
+      defines "HIVE_RELEASE"
       runtime "Release"
       optimize "On"
 
    filter "configurations:Dist"
-      defines { "DIST" }
+      defines "HIVE_DIST"
       runtime "Release"
       optimize "On"
