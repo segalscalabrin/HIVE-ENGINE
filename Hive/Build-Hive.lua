@@ -8,6 +8,7 @@ project "Hive"
    }
 
    includedirs {
+      "Source",
       "Vendor/spdlog/include"
    }
 
